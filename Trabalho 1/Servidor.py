@@ -12,7 +12,7 @@ def main():
     server.serve_forever()
     print("Aperte Ctrl+C para encerrar o programa")
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
     main()
     
 

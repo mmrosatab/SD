@@ -16,9 +16,8 @@ def main():
     cliente = xmlrpc.client.ServerProxy("http://localhost:8080/")
               
     
-    print(cliente.add(10,10))
-    print(cliente.cadastrarNota)
+    print(cliente.add(10,10)
+    #print(cliente.cadastrarNota)
     
 if __name__ == "__main__":
     main()
-
