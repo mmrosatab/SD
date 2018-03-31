@@ -1,0 +1,29 @@
+CREATE TABLE Periodo
+(
+	matricula int NOT NULL
+	disciplina varchar(4) NOT NULL
+	nota float
+
+	primary key(matricula, disciplina);
+);
+
+INSERT INTO periodo 
+VALUES (2013785011, 'TM00', 8.7);
+
+INSERT INTO periodo 
+VALUES (2013785011, 'TM01', 7.5);
+
+INSERT INTO periodo 
+VALUES (2013785011, 'TM02', 5.0);
+
+INSERT INTO periodo 
+VALUES (2013785012, 'TM00', 6.7);
+
+INSERT INTO periodo 
+VALUES (2013785012, 'TM01', 7.2);
+
+INSERT INTO periodo 
+VALUES (2013785012, 'TM02', 9.8);
+
+INSERT INTO periodo 
+VALUES (2013785013, 'TM03', 10);
