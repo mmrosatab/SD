@@ -20,14 +20,16 @@ def main():
         if opcao == "1":            
             matricula  = input("Matricula do aluno:")
             disciplina = input("Digite o codigo da disciplina:")
-            
-            while len(disciplina) > 4:
-                print("\nCodigo de disciplina incorreto. Digite novamente.\n")
-                disciplina = input("Digite o codigo da disciplina:")
                 
             nota       = input("Digite a nota a ser cadastrada:")                       
             
-            print(cliente.cadastrarNota(int(matricula),disciplina,float(nota)))
+            retorno = cliente.cadastrarNota(int(matricula),disciplina,float(nota))
+
+            if not(retorno):
+            	print("Código inválido")
+            else:
+            	print(retorno)
+
             
             decisao = input("Caso  deseje fazer outra operacao digite: Y.\n")            
             if decisao != "Y":
@@ -37,13 +39,9 @@ def main():
             matricula  = input("Matricula do aluno:")
             disciplina = input("Código da disciplina")
             
-            while len(disciplina) > 4:
-                print("\nCodigo de disciplina incorreto. Digite novamente.\n")
-                disciplina = input("Digite o codigo da disciplina:")
-            
             retorno = cliente.consultarNota(int(matricula),disciplina)
             if retorno == False:
-                print("ERRO: A nota requisitada nao existe no sistema.")               
+                print("ERRO: A nota requisitada nao existe no sistema")               
             else:
                 print(retorno)
             

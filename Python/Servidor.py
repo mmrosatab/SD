@@ -8,19 +8,19 @@ class Servidor():
  
     def __init__(self):
         
-        self.con = psycopg2.connect(host='localhost', database='Historico', user='postgres', password='thi30031993thi')
+        self.con = psycopg2.connect(host='localhost', database='postgres', user='postgres', password='20071992')
         cur = self.con.cursor()
         
         sql = "select exists (select 1 from information_schema.tables where table_name = 'periodo');"
         cur.execute(sql)
         retorno = cur.fetchone()
-        
-        if retorno == "False":
-            sql = "CREATE TABLE Periodo ( matricula int NOT NULL, disciplina varchar(4)",
-            "NOT NULL, nota float NOT NULL, primary key(matricula, disciplina));"
-            cur.execute(sql)
-                   
-        
+        print(retorno)
+
+        if retorno[0] == False:
+
+        	sql = "CREATE TABLE Periodo ( matricula int NOT NULL, disciplina varchar(4) NOT NULL, nota float NOT NULL, primary key(matricula, disciplina));"
+        	cur.execute(sql)
+
         self.con.commit()
         
         self.server = SimpleXMLRPCServer(("localhost", 8080))
@@ -37,6 +37,10 @@ class Servidor():
         
 
     def cadastrarNota(self,mat,codDisc,nota):
+        
+        if len(codDisc) > 4 or len(codDisc) == 0:
+        	return False
+
         cur   = self.con.cursor()
         
         sql   = 'SELECT nota FROM Periodo WHERE matricula = ' + str(mat) + ' AND disciplina = ' + "'" + codDisc + "'"
@@ -52,15 +56,20 @@ class Servidor():
         self.con.commit()
         return "Nota cadastrada."
     
-    def consultarNota(self,matricula, disciplina):
-        cur      = self.con.cursor()
-        sql      = 'SELECT disciplina, nota FROM Periodo WHERE matricula = '+ str(matricula) + ' AND disciplina = ' + "'" + disciplina + "';"
-        cur.execute(sql)        
-        linha    = cur.fetchone()
-        if linha is None:   
-            return False         
-        else:                  
-            return linha[0] + ' ' + str(linha[1])
+    def consultarNota(self,matricula, codDisc):
+
+    	if len(codDisc) > 4 or len(codDisc) == 0:
+    		return False
+
+    	cur      = self.con.cursor()
+    	sql      = 'SELECT disciplina, nota FROM Periodo WHERE matricula = '+ str(matricula) + ' AND disciplina = ' + "'" + codDisc + "';"
+    	cur.execute(sql)
+    	linha    = cur.fetchone()
+
+    	if linha is None:   
+    		return False
+    	else:
+    		return linha[0] + ' ' + str(linha[1])
             
         
     
